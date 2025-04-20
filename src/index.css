@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.thumbs {
+    display: flex;
+    flex-direction: row; /* since it's axis-vertical */
+    align-items: center;    /* centers items horizontally */
+    justify-content: center; /* centers items vertically */
+    height: 100%;           /* optional: ensures full height of wrapper */
+}
