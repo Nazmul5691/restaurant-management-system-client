@@ -6,8 +6,9 @@ function App() {
   return (
     <>
      
+      <h1>Vite + React</h1>
       <h1 className='text-6xl text-red-500'>Vite + React</h1>
-      <h2 className='text-center'>hiiiii</h2>
+      
       
     </>
   )
