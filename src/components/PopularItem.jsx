@@ -30,6 +30,7 @@ const PopularItem = () => {
                     }
                 </div>
             </div>
+            <button className="mt-10 flex mx-auto btn-outline border-[1px] border-b-[3px] btn">View Full Menu</button>
         </section>
     );
 };

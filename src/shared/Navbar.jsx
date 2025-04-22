@@ -1,12 +1,14 @@
+import { NavLink } from "react-router-dom";
 
 
 const Navbar = () => {
 
     const navItems =
         <>
-            <li><a>Item 1</a></li>
-            <li><a>Item 3</a></li>
-            <li><a>Item 3</a></li>
+            <li><NavLink to='/'>Home</NavLink></li>
+            <li><NavLink to='/menu'>Our Menu</NavLink></li>
+            <li><NavLink to='/'>Home</NavLink></li>
+            
         </>
     return (
         <div className="navbar fixed z-10  bg-opacity-30 bg-black text-white max-w-screen-xl shadow-sm">
