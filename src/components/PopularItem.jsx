@@ -2,16 +2,19 @@ import SectionsHeading from "./SectionsHeading";
 import menuItems from '../utils/menuData'
 import { useEffect, useState } from "react";
 import MenuCard from "../shared/MenuCard";
+import useMenu from "../hooks/useMenu";
 
 
 const PopularItem = () => {
-    const [menu, setMenu] = useState([])
+    // const [menu, setMenu] = useState([])
 
-
-    useEffect(() => {
-        const popularItem = menuItems.filter(item => item.category === 'popular')
-        setMenu(popularItem)
-    }, [])
+    const [menu] = useMenu();
+    const popular = menu.filter(item => item.category === 'popular')
+   
+    // useEffect(() => {
+    //     const popularItem = menuItems.filter(item => item.category === 'popular')
+    //     setMenu(popularItem)
+    // }, [])
 
 
 
@@ -26,7 +29,7 @@ const PopularItem = () => {
             <div>
                 <div className="grid grid-cols-2 gap-8 pt-10">
                     {
-                        menu.map(item => <MenuCard key={item._id} item={item} />)
+                        popular.map(item => <MenuCard key={item._id} item={item} />)
                     }
                 </div>
             </div>
