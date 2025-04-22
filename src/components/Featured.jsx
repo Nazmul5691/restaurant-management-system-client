@@ -11,7 +11,7 @@ const Featured = () => {
                         heading='Featured Item'
                     />
                 </div>
-                <div className="bg-[url('featured.jpg')] bg-cover bg-center h-[500px] w-full">
+                <div className="bg-[url('featured.jpg')] bg-fixed bg-cover bg-center h-[500px] w-full">
                     <div className="flex items-center h-[500px] w-full justify-center gap-20 px-36 py-20 text-white bg-black bg-opacity-50">
                         <div>
                             <img src={featuredImg} alt="" />
