@@ -21,7 +21,7 @@ const Featured = () => {
                             <h2 className="uppercase font-medium">Where i can get this?</h2>
                             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam reiciendis inventore hic culpa eos quos possimus corporis. Quaerat ex fugit nam et! Perferendis ab sed ea veniam magnam mollitia quo assumenda, doloribus nam quia, pariatur quibusdam aliquam, nesciunt voluptate fuga dolorum illo atque iure tenetur deleniti? Quibusdam, officia recusandae. Nam.</p>
 
-                            <button className="btn-accent btn">Order Now</button>
+                            <button className="btn-outline border-[1px] border-b-[3px] btn">Order Now</button>
                         </div>
                     </div>
                 </div>

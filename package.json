@@ -10,13 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-awesome/components": "^1.0.24",
     "localforage": "^1.10.0",
     "match-sorter": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.30.0",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "swiper": "^11.2.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
