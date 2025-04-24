@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
 import useMenu from "../hooks/useMenu";
 import Cover from "./Cover";
 import MenuCard from "./MenuCard";
 
 
-const MenuCategory = ({items, title, image}) => {
+const MenuCategory = ({ items, title, image }) => {
     // const [menu] = useMenu()
     return (
         <div>
@@ -12,6 +13,11 @@ const MenuCategory = ({items, title, image}) => {
                 {
                     items.map(item => <MenuCard key={item._id} item={item} />)
                 }
+            </div>
+            <div className="pt-5">
+                <Link to={`/orderFood/${title}`}>
+                    <button className="btn-outline border-[1px] border-b-[3px] btn">Order Now</button>
+                </Link>
             </div>
         </div>
     );

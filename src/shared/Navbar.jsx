@@ -7,9 +7,9 @@ const Navbar = () => {
         <>
             <li><NavLink to='/'>Home</NavLink></li>
             <li><NavLink to='/menu'>Our Menu</NavLink></li>
-            <li><a to='/'>Home</a></li>
-            
+            <li><NavLink to='/orderFood/dessert'>Order Food</NavLink></li>
         </>
+
     return (
         <div className="navbar fixed z-10  bg-opacity-30 bg-black text-white max-w-screen-xl shadow-sm">
             <div className="navbar-start">

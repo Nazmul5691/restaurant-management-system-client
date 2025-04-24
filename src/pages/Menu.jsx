@@ -21,7 +21,7 @@ const Menu = () => {
     return (
         <div>
             <Helmet title="Hungry Hut | Menu" />
-            
+
             <div className="flex flex-col gap-10">
                 <Cover bgImage={bgImage} title='Our Menu' />
 
@@ -31,19 +31,19 @@ const Menu = () => {
 
                 {/* dessert menu */}
                 <SectionsHeading subHeading="Try Our Dessert" heading="Dessert" />
-                <MenuCategory items={desserts} title='Dessert' image={dessertBg} />
+                <MenuCategory items={desserts} title='dessert' image={dessertBg} />
 
                 {/* pizza menu */}
                 <SectionsHeading subHeading="Try Our Pizza" heading="Pizza" />
-                <MenuCategory items={pizzas} title='Pizza' image={piazzaBg} />
+                <MenuCategory items={pizzas} title='pizza' image={piazzaBg} />
 
                 {/* soup menu */}
                 <SectionsHeading subHeading="Try Our Soup" heading="Soup" />
-                <MenuCategory items={soups} title='Soup' image={soupBg} />
+                <MenuCategory items={soups} title='soup' image={soupBg} />
 
                 {/* salad menu */}
-                <SectionsHeading subHeading="Try Our Soup" heading="Soup" />
-                <MenuCategory items={salads} title='Salad' image={saladBg} />
+                <SectionsHeading subHeading="Try Our Soup" heading="Salad" />
+                <MenuCategory items={salads} title='salad' image={saladBg} />
             </div>
         </div>
     );

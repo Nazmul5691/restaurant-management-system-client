@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import menuData from "../utils/menuData";
+
 
 
 const useMenu = () => {
@@ -8,9 +8,12 @@ const useMenu = () => {
 
 
     useEffect(()=>{
-        const allMenu = menuData;
-        setMenu(allMenu);
-        setLoading(false);
+        fetch('http://localhost:5000/menu')
+        .then(res => res.json())
+        .then(data => {
+            setMenu(data)
+            setLoading(false)
+        })
     },[])
 
     return [menu, loading]
