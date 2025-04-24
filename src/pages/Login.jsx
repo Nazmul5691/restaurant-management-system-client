@@ -1,8 +1,17 @@
+import { useEffect, useRef, useState } from 'react';
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 
 
 const Login = () => {
 
-    const handleLogin = event =>{
+    const captchaRef = useRef(null);
+    const [disabled, setDisabled] = useState(true);
+
+    useEffect(() => {
+        loadCaptchaEnginge(6);
+    }, [])
+
+    const handleLogin = event => {
         event.preventDefault();
         const form = event.target
         const username = form.username.value;
@@ -11,12 +20,25 @@ const Login = () => {
         console.log(username, password);
     }
 
+    const handleValidateCaptcha = () => {
+        const user_captcha_value = captchaRef.current.value;
+        // console.log(value);
+        if (validateCaptcha(user_captcha_value) == true) {
+            // alert('captcha matched')
+            setDisabled(false)
+        }
+        else {
+            alert('captcha does not match')
+            setDisabled(true)
+        }
+    }
+
 
     return (
         <div className="flex items-center justify-center min-h-screen">
-            <div className=" mx-auto w-full max-w-md space-y-4 rounded-lg border bg-white p-10 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
+            <div className=" mx-auto w-full max-w-md space-y-2 rounded-lg border bg-white px-10 py-6 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
                 <h1 className="text-3xl font-semibold">Sign In</h1>
-                <form onSubmit={handleLogin} className="space-y-6">
+                <form onSubmit={handleLogin} className="space-y-4">
                     <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
                         <label htmlFor="username_2" className="block font-medium">
                             Username
@@ -46,8 +68,33 @@ const Login = () => {
                             </a>
                         </div>
                     </div>
-                    <input type="submit" value='Login' className="w- rounded-md bg-sky-500 px-4 py-2 text-white transition-colors hover:bg-sky-600 dark:bg-sky-700"></input>
+
+                    {/* captcha */}
+                    <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
+                        <label htmlFor="captcha" className="block font-medium">
+                            <LoadCanvasTemplate />
+                        </label>
+                        <input
+                            className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
+                            id="captcha"
+                            placeholder="Enter the captcha above"
+                            name="captcha"
+                            type="text"
+                            ref={captchaRef}
+                        />
+                        <button type='button' onClick={handleValidateCaptcha} className="btn btn-accent btn-xs">Validate</button>
+                    </div>
+
+                    {/* login button */}
+                    <input
+                        disabled={disabled}
+                        type="submit"
+                        value='Login'
+                        className={`w-full rounded-md px-4 py-2 text-white transition-colors ${disabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-sky-700 hover:bg-sky-800 dark:bg-sky-700'}`}
+                    >
+                    </input>
                 </form>
+
                 <p className="text-center text-sm text-zinc-700 dark:text-zinc-300">
                     Don&apos;t have an account?
                     <a href="#" className="font-semibold underline">
