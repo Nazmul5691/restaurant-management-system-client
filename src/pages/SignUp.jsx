@@ -1,42 +1,95 @@
+import { useForm } from "react-hook-form";
 import { Form } from "react-router-dom";
 
 
 const SignUp = () => {
 
-    const handleSignUp = () => {
+    const {
+        register,
+        formState: { errors },
+        handleSubmit,
+    } = useForm()
 
-    }
+
+    const onSubmit = (data) => console.log(data)
+
 
 
     return (
         <div className="flex items-center justify-center min-h-screen">
             <div className=" mx-auto w-full max-w-md space-y-2 rounded-lg border bg-white px-10 py-6 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
                 <h1 className="text-3xl font-semibold">Sign Up</h1>
-                <form onSubmit={handleSignUp} className="space-y-4">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                    {/* firstName */}
+                    <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
+                        <label htmlFor="firstName_2" className="block font-medium">
+                            First Name
+                        </label>
+                        <input
+                            {...register("name", { required: true })}
+                            className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
+                            id="firstName"
+                            placeholder="Enter First Name"
+                            name="name"
+                            type="text"
+                        />
+                        {errors.name && <span className="text-rose-600">First Name is required</span>}
+
+                    </div>
+
+                    {/* email */}
                     <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
                         <label htmlFor="email_2" className="block font-medium">
                             Email
                         </label>
                         <input
+                            {...register("email", { required: true })}
                             className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
                             id="email_2"
                             placeholder="Enter email"
                             name="email"
                             type="email"
                         />
+                        {errors.email && <span className="text-rose-600">Email is required</span>}
                     </div>
+
+                    {/* password */}
                     <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
                         <label htmlFor="password_2" className="block font-medium">
                             Password
                         </label>
                         <input
+                            {...register("password", {
+                                required: "Password is required",
+                                minLength: {
+                                    value: 6,
+                                    message: "Password must be at least 6 characters",
+                                },
+                                maxLength: {
+                                    value: 20,
+                                    message: "Password must not exceed 20 characters",
+                                },
+                                // validate: {
+                                //     hasUppercase: (value) =>
+                                //         /[A-Z]/.test(value) || "Must contain at least one uppercase letter",
+                                //     hasLowercase: (value) =>
+                                //         /[a-z]/.test(value) || "Must contain at least one lowercase letter",
+                                //     hasNumber: (value) =>
+                                //         /\d/.test(value) || "Must contain at least one number",
+                                //     hasSpecialChar: (value) =>
+                                //         /[^A-Za-z0-9]/.test(value) ||
+                                //         "Must contain at least one special character",
+                                // },
+                            })}
                             className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
                             id="password_2"
                             placeholder="Enter password"
                             name="password"
                             type="password"
                         />
-
+                        {errors.password && (
+                            <span className="text-rose-600">{errors.password.message}</span>
+                        )}
                     </div>
 
                     {/* login button */}
