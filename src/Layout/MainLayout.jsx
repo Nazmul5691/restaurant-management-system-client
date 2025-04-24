@@ -5,13 +5,16 @@ import Footer from "../shared/Footer";
 
 const MainLayout = () => {
     const location = useLocation();
-    console.log(location);
-    const noHeaderFooter = location.pathname.includes('login')
+    // console.log(location);
+    // const noHeaderFooter = location.pathname.includes('login')
+
+
     return (
         <div>
-            { noHeaderFooter || <Navbar />}
+            {/* { noHeaderFooter || <Navbar />} */}
+            <Navbar />
             <Outlet />
-            { noHeaderFooter || <Footer />}
+            <Footer />
         </div>
     );
 };
