@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 const Navbar = () => {
 
     const { user, logOut } = useContext(AuthContext);
+    // console.log(user);
 
     const handleLogOut = () =>{
         logOut()
@@ -55,7 +56,12 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
                 {user ?
-                    <><button onClick={handleLogOut} className="btn btn-warning">Logout</button></>
+                    
+                    <>
+                    <p className="pr-2">{user?.displayName}</p>
+                    <img src={user?.photoURL} className="w-[40px] rounded-full pr-2" alt="" />
+                    <button onClick={handleLogOut} className="btn btn-warning">Logout</button>
+                    </>
                     :
                     <><button className="btn bg-yellow-200"><Link to='/login'>Login</Link></button> </>}
             </div>
