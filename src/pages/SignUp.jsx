@@ -1,12 +1,15 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProviders";
+import Swal from "sweetalert2";
 
 
 const SignUp = () => {
 
-    const {createUser} = useContext(AuthContext);
+    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const navigate = useNavigate();
+
 
     const {
         register,
@@ -18,13 +21,23 @@ const SignUp = () => {
 
     const onSubmit = (data) => {
         console.log(data);
-        
+
         createUser(data.email, data.password)
-        .then(result =>{
-            console.log(result.user);
-            reset();
-        })
-        .error(console.log(error.message))
+            .then(result => {
+                console.log(result.user);
+                updateUserProfile(data.name, data.photoURL)
+                    .then(() => {
+                        Swal.fire({
+                            text: "User Successfully Create",
+                            icon: "success"
+                        });
+                        reset();
+                        navigate('/')
+                    })
+                    .catch(error => console.log(error.message))
+
+            })
+            .catch(error => console.log(error.message))
     }
 
 
@@ -48,6 +61,22 @@ const SignUp = () => {
                             type="text"
                         />
                         {errors.name && <span className="text-rose-600">First Name is required</span>}
+
+                    </div>
+
+                    {/* photoURL */}
+                    <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
+                        <label htmlFor="firstName_2" className="block font-medium">
+                            PhotoURL
+                        </label>
+                        <input
+                            {...register("photoURL", { required: true })}
+                            className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
+                            id="photo"
+                            placeholder="photoURL"
+                            type="text"
+                        />
+                        {errors.photoURL && <span className="text-rose-600">photoURL is required</span>}
 
                     </div>
 
@@ -113,7 +142,7 @@ const SignUp = () => {
                         {/* {errors.password && (
                             <span className="text-rose-600">{errors.password.message}</span>
                         )} */}
-                        
+
                         {errors.password?.type === "required" && (
                             <p className="text-red-600">Password is required</p>
                         )}
