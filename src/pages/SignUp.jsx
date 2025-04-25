@@ -1,17 +1,31 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Form } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProviders";
 
 
 const SignUp = () => {
+
+    const {createUser} = useContext(AuthContext);
 
     const {
         register,
         formState: { errors },
         handleSubmit,
+        reset,
     } = useForm()
 
 
-    const onSubmit = (data) => console.log(data)
+    const onSubmit = (data) => {
+        console.log(data);
+        
+        createUser(data.email, data.password)
+        .then(result =>{
+            console.log(result.user);
+            reset();
+        })
+        .error(console.log(error.message))
+    }
 
 
 
@@ -59,36 +73,63 @@ const SignUp = () => {
                             Password
                         </label>
                         <input
-                            {...register("password", {
-                                required: "Password is required",
-                                minLength: {
-                                    value: 6,
-                                    message: "Password must be at least 6 characters",
-                                },
-                                maxLength: {
-                                    value: 20,
-                                    message: "Password must not exceed 20 characters",
-                                },
-                                // validate: {
-                                //     hasUppercase: (value) =>
-                                //         /[A-Z]/.test(value) || "Must contain at least one uppercase letter",
-                                //     hasLowercase: (value) =>
-                                //         /[a-z]/.test(value) || "Must contain at least one lowercase letter",
-                                //     hasNumber: (value) =>
-                                //         /\d/.test(value) || "Must contain at least one number",
-                                //     hasSpecialChar: (value) =>
-                                //         /[^A-Za-z0-9]/.test(value) ||
-                                //         "Must contain at least one special character",
-                                // },
-                            })}
+                            // {...register("password", {
+                            //     required: "Password is required",
+                            //     minLength: {
+                            //         value: 6,
+                            //         message: "Password must be at least 6 characters",
+                            //     },
+                            //     maxLength: {
+                            //         value: 20,
+                            //         message: "Password must not exceed 20 characters",
+                            //     },
+                            //     validate: {
+                            //         hasUppercase: (value) =>
+                            //             /[A-Z]/.test(value) || "Must contain at least one uppercase letter",
+                            //         hasLowercase: (value) =>
+                            //             /[a-z]/.test(value) || "Must contain at least one lowercase letter",
+                            //         hasNumber: (value) =>
+                            //             /\d/.test(value) || "Must contain at least one number",
+                            //         hasSpecialChar: (value) =>
+                            //             /[^A-Za-z0-9]/.test(value) ||
+                            //             "Must contain at least one special character",
+                            //     },
+                            // })}
+
+
                             className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
                             id="password_2"
                             placeholder="Enter password"
                             name="password"
                             type="password"
+                            {...register("password", {
+                                required: true,
+                                minLength: 6,
+                                maxLength: 20,
+                                pattern:
+                                    /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/,
+                            })}
                         />
-                        {errors.password && (
+                        {/* {errors.password && (
                             <span className="text-rose-600">{errors.password.message}</span>
+                        )} */}
+                        
+                        {errors.password?.type === "required" && (
+                            <p className="text-red-600">Password is required</p>
+                        )}
+                        {errors.password?.type === "minLength" && (
+                            <p className="text-red-600">Password must be 6 characters</p>
+                        )}
+                        {errors.password?.type === "maxLength" && (
+                            <p className="text-red-600">
+                                Password must be less then 20 characters
+                            </p>
+                        )}
+                        {errors.password?.type === "pattern" && (
+                            <p className="text-red-600">
+                                Password must have one uppercase character, one lowercase
+                                character, one number and one special character
+                            </p>
                         )}
                     </div>
 
@@ -108,6 +149,9 @@ const SignUp = () => {
                         SignIn
                     </a>
                 </p>
+
+
+                {/* social login */}
                 <div className="my-8 flex items-center">
                     <hr className="flex-1 border-gray-400" />
                     <div className="mx-4 text-gray-400">OR</div>

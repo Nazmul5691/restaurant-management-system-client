@@ -1,14 +1,16 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../providers/AuthProviders';
+import Swal from 'sweetalert2';
 
 
 const Login = () => {
 
-    const captchaRef = useRef(null);
+
+    // const captchaRef = useRef(null);
     const [disabled, setDisabled] = useState(true);
 
-    const {signIn} = useContext(AuthContext);
+    const { signIn, user } = useContext(AuthContext);
 
     useEffect(() => {
         loadCaptchaEnginge(6);
@@ -18,30 +20,36 @@ const Login = () => {
         event.preventDefault();
         const form = event.target
         const email = form.email.value;
-        const pass = form.password.value;
+        const password = form.password.value;
 
         // console.log(email, password);
-        signIn(email, pass)
-        .then(result =>{
-            console.log(result.user);
-        })
-        .catch(error =>{
-            console.log(error.message);
-        })
+        signIn(email, password)
+            .then(result => {
+                console.log(result.user);
+                Swal.fire({
+                    text: "User Successfully Login",
+                    icon: "success"
+                });
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
     }
 
-    const handleValidateCaptcha = () => {
-        const user_captcha_value = captchaRef.current.value;
-        // console.log(value);
-        if (validateCaptcha(user_captcha_value) == true) {
-            // alert('captcha matched')
-            setDisabled(false)
+
+
+    const handleValidateCaptcha = e => {
+        const user_captcha_value = e.target.value;
+
+        if (validateCaptcha(user_captcha_value)) {
+            setDisabled(false); // Enable the login button
+        } else {
+            alert('Captcha does not match. Please try again.');
+            setDisabled(true);           // Keep the login button disabled
+            loadCaptchaEnginge(6);       // Regenerate captcha
+            e.target.value = '';         // Clear the input
         }
-        else {
-            alert('captcha does not match')
-            setDisabled(true)
-        }
-    }
+    };
 
 
     return (
@@ -85,14 +93,15 @@ const Login = () => {
                             <LoadCanvasTemplate />
                         </label>
                         <input
+                            onBlur={handleValidateCaptcha}
                             className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
                             id="captcha"
                             placeholder="Enter the captcha above"
                             name="captcha"
                             type="text"
-                            ref={captchaRef}
+                        // ref={captchaRef}
                         />
-                        <button type='button' onClick={handleValidateCaptcha} className="btn btn-accent btn-xs">Validate</button>
+                        {/* <button type='button' className="btn btn-accent btn-xs">Validate</button> */}
                     </div>
 
                     {/* login button */}
@@ -140,3 +149,9 @@ const Login = () => {
 };
 
 export default Login;
+
+
+
+
+
+
