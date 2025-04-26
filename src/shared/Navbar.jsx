@@ -32,7 +32,7 @@ const Navbar = () => {
             <li><NavLink to='/secret'>Secret</NavLink></li>
             <li><NavLink to='/orderFood/dessert'>Order Food</NavLink></li>
             <li className="flex gap-2 items-center justify-center bg-orange-400 rounded">
-                <NavLink to='/'>
+                <NavLink to='/dashboard/cart'>
                         <BsFillCartFill />
                         <div className="badge badge-sm badge-secondary">+{cart.length}</div>
                 </NavLink>
