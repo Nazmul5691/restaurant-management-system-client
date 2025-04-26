@@ -3,12 +3,14 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProviders";
 import Swal from "sweetalert2";
 import { BsFillCartFill } from "react-icons/bs";
+import useCarts from "../hooks/useCarts";
 
 
 const Navbar = () => {
 
     const { user, logOut } = useContext(AuthContext);
     // console.log(user);
+    const [cart] = useCarts();
 
     const handleLogOut = () => {
         logOut()
@@ -32,7 +34,7 @@ const Navbar = () => {
             <li className="flex gap-2 items-center justify-center bg-orange-400 rounded">
                 <NavLink to='/'>
                         <BsFillCartFill />
-                        <div className="badge badge-sm badge-secondary">+0</div>
+                        <div className="badge badge-sm badge-secondary">+{cart.length}</div>
                 </NavLink>
             </li>
 
