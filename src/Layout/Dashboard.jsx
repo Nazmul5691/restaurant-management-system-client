@@ -1,4 +1,4 @@
-import { FaCalendar, FaHome, FaShoppingCart, FaStar, FaBookOpen } from "react-icons/fa";
+import { FaCalendar, FaHome, FaShoppingCart, FaStar, FaBookOpen, FaBars, FaEnvelope } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
@@ -10,6 +10,7 @@ const Dashboard = () => {
                     🍽️ Bistro Boss
                 </div>
                 <ul className="menu p-4 space-y-2 w-full">
+                    {/* User Section */}
                     <li>
                         <NavLink
                             to='/dashboard/userHome'
@@ -72,6 +73,65 @@ const Dashboard = () => {
                             <div className="flex items-center gap-3">
                                 <FaBookOpen />
                                 <span>My Bookings</span>
+                            </div>
+                        </NavLink>
+                    </li>
+
+                    {/* Divider */}
+                    <div className="divider border-t border-orange-300 my-4"></div>
+
+                    {/* Main Site Navigation */}
+                    <li>
+                        <NavLink
+                            to='/'
+                            className={({ isActive }) =>
+                                `block w-full p-3 rounded-lg hover:bg-orange-800 transition ${isActive ? 'bg-orange-900' : ''}`
+                            }
+                        >
+                            <div className="flex items-center gap-3">
+                                <FaHome />
+                                <span>Home</span>
+                            </div>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to='/orderFood/dessert'
+                            className={({ isActive }) =>
+                                `block w-full p-3 rounded-lg hover:bg-orange-800 transition ${isActive ? 'bg-orange-900' : ''}`
+                            }
+                        >
+                            <div className="flex items-center gap-3">
+                                <FaBars />
+                                <span>Menu</span>
+                            </div>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to='/'
+                            onClick={(e) => e.preventDefault()}
+                            className={({ isActive }) =>
+                                `block w-full p-3 rounded-lg hover:bg-orange-800 transition ${isActive ? 'bg-orange-900' : ''}`
+                            }
+                        >
+                            <div className="flex items-center gap-3">
+                                <FaShoppingCart />
+                                <span>Shop</span>
+                            </div>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to='/'
+                            onClick={(e) => e.preventDefault()}
+                            className={({ isActive }) =>
+                                `block w-full p-3 rounded-lg hover:bg-orange-800 transition ${isActive ? 'bg-orange-900' : ''}`
+                            }
+                        >
+                            <div className="flex items-center gap-3">
+                                <FaEnvelope />
+                                <span>Contact</span>
                             </div>
                         </NavLink>
                     </li>
