@@ -9,17 +9,17 @@ const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
     // console.log(user);
 
-    const handleLogOut = () =>{
+    const handleLogOut = () => {
         logOut()
-        .then(res =>{
-            console.log('user successfully logout');
-            Swal.fire({
-                
-                text: "User Successfully Logout",
-                icon: "success"
-              });
-        })
-        .catch(error => console.log(error.message))
+            .then(res => {
+                console.log('user successfully logout');
+                Swal.fire({
+
+                    text: "User Successfully Logout",
+                    icon: "success"
+                });
+            })
+            .catch(error => console.log(error.message))
     }
 
     const navItems =
@@ -28,6 +28,15 @@ const Navbar = () => {
             <li><NavLink to='/menu'>Our Menu</NavLink></li>
             <li><NavLink to='/secret'>Secret</NavLink></li>
             <li><NavLink to='/orderFood/dessert'>Order Food</NavLink></li>
+            <li>
+                <NavLink to='/'>
+                    <button className="">
+
+                         <div className="badge badge-sm badge-secondary">+0</div>
+                    </button>
+                </NavLink>
+            </li>
+
             {/* <li><NavLink to='/signUp'>Sign Up</NavLink></li> */}
             {/* <li><NavLink to='/login'>Login</NavLink></li> */}
 
@@ -56,11 +65,11 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
                 {user ?
-                    
+
                     <>
-                    <p className="pr-2">{user?.displayName}</p>
-                    <img src={user?.photoURL} className="w-[40px] rounded-full pr-2" alt="" />
-                    <button onClick={handleLogOut} className="btn btn-warning">Logout</button>
+                        <p className="pr-2">{user?.displayName}</p>
+                        <img src={user?.photoURL} className="w-[40px] rounded-full pr-2" alt="" />
+                        <button onClick={handleLogOut} className="btn btn-warning">Logout</button>
                     </>
                     :
                     <><button className="btn bg-yellow-200"><Link to='/login'>Login</Link></button> </>}
