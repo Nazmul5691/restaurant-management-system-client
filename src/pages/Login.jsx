@@ -13,6 +13,7 @@ const Login = () => {
     const location = useLocation();
 
     const from = location.state?.from?.pathname || '/'
+    console.log(location.state);
 
     useEffect(() => {
         loadCaptchaEnginge(6);
@@ -108,11 +109,18 @@ const Login = () => {
                     </div>
 
                     {/* login button */}
-                    <input
+                    {/* <input
                         disabled={disabled}
                         type="submit"
                         value='Login'
-                        className={`w-full rounded-md px-4 py-2 text-white transition-colors ${disabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-sky-700 hover:bg-sky-800 dark:bg-sky-700'}`}
+                        className={`w-full rounded-md px-4 py-2 text-white transition-colors ${disabled ? 'bg-gray-400 cursor-pointer' : 'bg-sky-700 hover:bg-sky-800 dark:bg-sky-700'}`}
+                    >
+                    </input> */}
+                    
+                    <input
+                        type="submit"
+                        value='Login'
+                        className={`w-full rounded-md px-4 py-2 text-white transition-colors cursor-pointer bg-sky-700 hover:bg-sky-800 dark:bg-sky-700}`}
                     >
                     </input>
                 </form>
