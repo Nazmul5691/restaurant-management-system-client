@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProviders";
 import Swal from "sweetalert2";
+import { BsFillCartFill } from "react-icons/bs";
 
 
 const Navbar = () => {
@@ -30,9 +31,9 @@ const Navbar = () => {
             <li><NavLink to='/orderFood/dessert'>Order Food</NavLink></li>
             <li>
                 <NavLink to='/'>
-                    <button className="">
-
-                         <div className="badge badge-sm badge-secondary">+0</div>
+                    <button className="flex gap-2 items-center justify-center bg-orange-400 px-2 py-2">
+                        <BsFillCartFill />
+                        <div className="badge badge-sm badge-secondary">+0</div>
                     </button>
                 </NavLink>
             </li>
