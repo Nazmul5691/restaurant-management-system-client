@@ -5,7 +5,7 @@ const Dashboard = () => {
     return (
         <div className="flex min-h-screen bg-gray-100">
             {/* Sidebar */}
-            <div className="w-64 bg-gradient-to-b from-orange-500 to-orange-700 text-white shadow-lg">
+            <div className="w-64 bg-gradient-to-b min-h-screen fixed from-orange-500 to-orange-700 text-white shadow-lg">
                 <div className="p-6 text-center font-bold text-2xl border-b border-orange-300">
                     🍽️ Bistro Boss
                 </div>
@@ -139,7 +139,7 @@ const Dashboard = () => {
             </div>
 
             {/* Main Content */}
-            <div className="flex-1 p-8">
+            <div className="flex-1 px-8 pt-0 ml-64">
                 <Outlet />
             </div>
         </div>
@@ -151,56 +151,3 @@ export default Dashboard;
 
 
 
-
-// import { FaCalendar, FaHome, FaShoppingCart } from "react-icons/fa";
-// import { NavLink, Outlet } from "react-router-dom";
-
-
-// const Dashboard = () => {
-//     return (
-//         <div className="flex">
-//             {/* dashboard side bar */}
-//             <div className="w-64 min-h-screen bg-orange-400">
-//                 <ul className="menu p-4">
-//                     <li>
-//                         <NavLink to='/dashboard/userHome'>
-//                             <FaHome />
-//                             User Home
-//                         </NavLink>
-//                     </li>
-//                     <li>
-//                         <NavLink to='/dashboard/reservation'>
-//                             <FaCalendar />
-//                             Reservation
-//                         </NavLink>
-//                     </li>
-//                     <li>
-//                         <NavLink to='/dashboard/cart'>
-//                             <FaShoppingCart />
-//                             My cart
-//                         </NavLink>
-//                     </li>
-//                     <li>
-//                         <NavLink to='/dashboard/review'>
-//                             <FaHome />
-//                             My Review
-//                         </NavLink>
-//                     </li>
-//                     <li>
-//                         <NavLink to='/dashboard/booking'>
-//                             <FaHome />
-//                             My Bookings
-//                         </NavLink>
-//                     </li>
-//                 </ul>
-//             </div>
-
-//             {/* dashboard content */}
-//             <div>
-//                 <Outlet />
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Dashboard;
