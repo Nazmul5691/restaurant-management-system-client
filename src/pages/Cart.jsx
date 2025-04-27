@@ -1,7 +1,4 @@
 
-
-
-
 import { FaTrash } from "react-icons/fa";
 import useCarts from "../hooks/useCarts";
 import Swal from "sweetalert2";
