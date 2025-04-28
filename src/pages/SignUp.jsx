@@ -201,7 +201,7 @@ const SignUp = () => {
                 {/* Social icons */}
                 <div className="flex justify-center space-x-4 *:border hover:*:bg-zinc-400/20 *:dark:border-zinc-700">
 
-                    {/* <SocialLogin /> */}
+                    <SocialLogin />
 
                     <button aria-label="Log in with Twitter" className="rounded-full p-3">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="size-5 fill-current">
