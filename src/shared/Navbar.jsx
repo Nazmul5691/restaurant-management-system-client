@@ -4,6 +4,7 @@ import { AuthContext } from "../providers/AuthProviders";
 import Swal from "sweetalert2";
 import { BsFillCartFill } from "react-icons/bs";
 import useCarts from "../hooks/useCarts";
+import { FaUserCircle } from "react-icons/fa";
 
 
 const Navbar = () => {
@@ -33,8 +34,8 @@ const Navbar = () => {
             <li><NavLink to='/orderFood/dessert'>Order Food</NavLink></li>
             <li className="flex gap-2 items-center justify-center bg-orange-400 rounded">
                 <NavLink to='/dashboard/cart'>
-                        <BsFillCartFill />
-                        <div className="badge badge-sm badge-secondary">+{cart.length}</div>
+                    <BsFillCartFill />
+                    <div className="badge badge-sm badge-secondary">+{cart.length}</div>
                 </NavLink>
             </li>
 
@@ -45,7 +46,7 @@ const Navbar = () => {
         </>
 
     return (
-        <div className="navbar fixed z-10 h-[40px] bg-opacity-30 bg-black text-white max-w-screen-xl shadow-sm">
+        <div className="navbar fixed z-10  bg-opacity-30 bg-black text-white max-w-screen-xl shadow-sm">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -69,7 +70,8 @@ const Navbar = () => {
 
                     <>
                         <p className="pr-2">{user?.displayName}</p>
-                        <img src={user?.photoURL} className="w-[40px] rounded-full pr-2" alt="" />
+                        <img src={user?.photoURL} className="w-[40px] h-[40px] rounded-full mr-2" alt="" />
+                        
                         <button onClick={handleLogOut} className="btn btn-warning">Logout</button>
                     </>
                     :
