@@ -70,8 +70,19 @@ const Navbar = () => {
 
                     <>
                         <p className="pr-2">{user?.displayName}</p>
-                        <img src={user?.photoURL} className="w-[40px] h-[40px] rounded-full mr-2" alt="" />
-                        
+                        {/* <img src={user?.photoURL} className="w-[40px] h-[40px] rounded-full mr-2" alt="" /> */}
+                        {user?.photoURL ? (
+                            <img
+                                src={user.photoURL}
+                                className="w-[40px] h-[40px] rounded-full mr-2 object-cover"
+                                alt="User Profile"
+                            />
+                        ) : (
+                            <div className="w-[40px] h-[40px] rounded-full bg-gray-300 text-gray-700 flex items-center justify-center mr-2">
+                                <FaUserCircle className="text-2xl" />
+                            </div>
+                        )}
+
                         <button onClick={handleLogOut} className="btn btn-warning">Logout</button>
                     </>
                     :
