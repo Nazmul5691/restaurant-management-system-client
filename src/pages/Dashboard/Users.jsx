@@ -1,0 +1,83 @@
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { FaTrash } from "react-icons/fa";
+
+
+const Users = () => {
+    const axiosSecure = useAxiosSecure();
+
+
+    const { data: users = [] } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/users')
+            return res.data
+        }
+    })
+    return (
+        <div className="relative pt-8">
+            {/* Heading */}
+            <div className="text-center space-y-2 mb-6">
+                <h1 className="text-4xl font-extrabold text-gray-800">All Users</h1>
+                <p className="text-gray-500">Manage all registered users from here</p>
+            </div>
+
+            {/* Table Card */}
+            <div className="bg-white shadow-xl rounded-lg overflow-hidden border border-gray-200">
+                {/* Scrollable Table */}
+                <div className="overflow-auto max-h-[500px]">
+                    <table className="min-w-full text-sm text-left text-gray-600">
+                        {/* Table Head */}
+                        <thead className="bg-orange-500 text-white sticky top-0 z-10 text-sm uppercase">
+                            <tr>
+                                <th className="px-6 py-4">#</th>
+                                <th className="px-6 py-4">Name</th>
+                                <th className="px-6 py-4">Email</th>
+                                <th className="px-6 py-4">Role</th>
+                                <th className="px-6 py-4 text-center">Action</th>
+                            </tr>
+                        </thead>
+
+                        {/* Table Body */}
+                        <tbody>
+                            {users.length > 0 ? (
+                                users.map((user, index) => (
+                                    <tr
+                                        key={user._id}
+                                        className="hover:bg-orange-50 text-black transition duration-200 border-b"
+                                    >
+                                        <td className="px-6 py-3 font-medium">{index + 1}</td>
+                                        <td className="px-6 py-3">{user.name}</td>
+                                        <td className="px-6 py-3">{user.email}</td>
+                                        <td className="px-6 py-3 text-green-600 font-semibold capitalize">
+                                            {user.role}
+                                        </td>
+                                        <td className="px-6 py-3 text-center">
+                                            <button
+                                                className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full transition duration-200 hover:scale-105"
+                                                title="Delete User"
+                                            >
+                                                <FaTrash className="w-4 h-4" />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td
+                                        colSpan="5"
+                                        className="text-center py-6 text-gray-400 font-medium"
+                                    >
+                                        No users found.
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Users;
