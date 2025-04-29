@@ -94,7 +94,9 @@ const Cart = () => {
 
                                         {/* Delete Button */}
                                         <td className="py-2">
-                                            <button onClick={() => handleDelete(item._id)} className="btn bg-red-500 btn-xs hover:scale-110 transition">
+                                            <button onClick={() => handleDelete(item._id)} className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full transition duration-200 hover:scale-105"
+                                            title="Delete User"
+                                            >
                                                 <FaTrash className="h-4 w-4" />
                                             </button>
                                         </td>

@@ -1,19 +1,48 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaUsers } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 
 const Users = () => {
     const axiosSecure = useAxiosSecure();
 
 
-    const { data: users = [] } = useQuery({
+    const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosSecure.get('/users')
             return res.data
         }
     })
+
+    const handleDeleteUser = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/users/${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your item has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+            }
+        });
+    }
+
+
     return (
         <div className="relative pt-8">
             {/* Heading */}
@@ -51,9 +80,16 @@ const Users = () => {
                                         <td className="px-6 py-3">{user.email}</td>
                                         <td className="px-6 py-3 text-green-600 font-semibold capitalize">
                                             {user.role}
+                                            <button
+                                                className="bg-orange-500 hover:bg-orange-700 text-white p-2 rounded-full transition duration-200 hover:scale-105"
+                                                title="Delete User"
+                                            >
+                                                <FaUsers className="w-4 h-4" />
+                                            </button>
                                         </td>
                                         <td className="px-6 py-3 text-center">
                                             <button
+                                                onClick={() => handleDeleteUser(user._id)}
                                                 className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full transition duration-200 hover:scale-105"
                                                 title="Delete User"
                                             >
