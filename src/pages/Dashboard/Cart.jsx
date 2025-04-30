@@ -7,13 +7,12 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 const Cart = () => {
     const [cart, refetch] = useCarts();
     const totalPrice = cart.reduce((total, item) => total + item.price, 0);
-
     const axiosSecure = useAxiosSecure();
 
     const handleDelete = id => {
         Swal.fire({
             title: "Are you sure?",
-            text: "You won't be able to revert this!",
+            text: "You want to delete this!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -74,7 +73,6 @@ const Cart = () => {
                                 cart.map((item, index) => (
                                     <tr key={item._id} className="hover:bg-orange-50 transition text-sm">
                                         <td className="font-semibold py-2">{index + 1}</td>
-
                                         {/* Item Image */}
                                         <td className="py-2">
                                             <div className="flex items-center gap-4">
@@ -104,7 +102,6 @@ const Cart = () => {
                                 ))
                             }
                         </tbody>
-
                     </table>
                 </div>
             </div>
