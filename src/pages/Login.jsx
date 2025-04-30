@@ -42,7 +42,6 @@ const Login = () => {
     }
 
 
-
     const handleValidateCaptcha = e => {
         const user_captcha_value = e.target.value;
 
@@ -137,6 +136,8 @@ const Login = () => {
                     <div className="mx-4 text-gray-400">OR</div>
                     <hr className="flex-1 border-gray-400" />
                 </div>
+
+                
                 {/* Social icons */}
                 <div className="flex justify-center space-x-4 *:border hover:*:bg-zinc-400/20 *:dark:border-zinc-700">
                     <SocialLogin />
