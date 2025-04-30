@@ -16,7 +16,7 @@ const Users = () => {
         }
     })
 
-    const handleDeleteUser = (id) => {
+    const handleDeleteUser = (user) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -27,7 +27,7 @@ const Users = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.delete(`/users/${id}`)
+                axiosSecure.delete(`/users/${user._id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             refetch();
@@ -43,12 +43,17 @@ const Users = () => {
     }
 
 
+    const handleMakeAdmin = (user) => {
+
+    }
+
+
     return (
         <div className="relative pt-8">
             {/* Heading */}
             <div className="text-center space-y-2 mb-6">
                 <h1 className="text-4xl font-extrabold text-gray-800">All Users</h1>
-                <p className="text-gray-500">Manage all registered users from here</p>
+                <p className="text-gray-500">---Manage all registered users from here---</p>
             </div>
 
             {/* Table Card */}
@@ -79,8 +84,8 @@ const Users = () => {
                                         <td className="px-6 py-3">{user.name}</td>
                                         <td className="px-6 py-3">{user.email}</td>
                                         <td className="px-6 py-3 text-green-600 font-semibold capitalize">
-                                            {user.role}
                                             <button
+                                                onClick={() => handleMakeAdmin(user)}
                                                 className="bg-orange-500 hover:bg-orange-700 text-white p-2 rounded-full transition duration-200 hover:scale-105"
                                                 title="Delete User"
                                             >
@@ -89,7 +94,7 @@ const Users = () => {
                                         </td>
                                         <td className="px-6 py-3 text-center">
                                             <button
-                                                onClick={() => handleDeleteUser(user._id)}
+                                                onClick={() => handleDeleteUser(user)}
                                                 className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full transition duration-200 hover:scale-105"
                                                 title="Delete User"
                                             >
