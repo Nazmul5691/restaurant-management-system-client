@@ -44,7 +44,20 @@ const Users = () => {
 
 
     const handleMakeAdmin = (user) => {
-
+        axiosSecure.patch(`/users/admin/${user._id}`)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.modifiedCount > 0) {
+                    refetch()
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${user.name} is an admin now`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
     }
 
 
@@ -84,13 +97,15 @@ const Users = () => {
                                         <td className="px-6 py-3">{user.name}</td>
                                         <td className="px-6 py-3">{user.email}</td>
                                         <td className="px-6 py-3 text-green-600 font-semibold capitalize">
-                                            <button
-                                                onClick={() => handleMakeAdmin(user)}
-                                                className="bg-orange-500 hover:bg-orange-700 text-white p-2 rounded-full transition duration-200 hover:scale-105"
-                                                title="Delete User"
-                                            >
-                                                <FaUsers className="w-4 h-4" />
-                                            </button>
+                                            {user.role === 'admin' ? 'Admin' :
+                                                <button
+                                                    onClick={() => handleMakeAdmin(user)}
+                                                    className="bg-orange-500 hover:bg-orange-700 text-white p-2 rounded-full transition duration-200 hover:scale-105"
+                                                    title="Make Admin"
+                                                >
+                                                    <FaUsers className="w-4 h-4" />
+                                                </button>
+                                            }
                                         </td>
                                         <td className="px-6 py-3 text-center">
                                             <button
