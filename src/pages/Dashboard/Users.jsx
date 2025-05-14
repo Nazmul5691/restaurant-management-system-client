@@ -79,7 +79,7 @@ const Users = () => {
             {/* Heading */}
             <div className="text-center space-y-2 mb-6">
                 <h1 className="text-4xl font-extrabold text-gray-800">All Users</h1>
-                <p className="text-gray-500">---Manage all registered users from here---</p>
+                <p className="text-gray-500"> --- Manage all registered users from here --- </p>
             </div>
 
             {/* Table Card */}
